@@ -1,32 +1,31 @@
-/**
- * Marine subclass. Implements Trackable and Relocatable.
- *
- * TODO M2: Make this class extend Animal
- * TODO M3: Make this class implement Trackable and Relocatable
- */
-public class Marine /* TODO M2: extends Animal */ /* TODO M3: implements Trackable, Relocatable */ {
-    // TODO M2: Declare private fields: maxDepthM (double), tankSizeLitres (int)
+public class Marine extends Animal /* TODO M3: implements Trackable, Relocatable */ {
+    private double maxDepthM;
+    private int tankSizeLitres;
 
-    /**
-     * Constructor.
-     * TODO M2: Implement constructor that calls super() and sets Marine-specific fields
-     */
     public Marine(String species, String nickname, String island, double weightKg, String healthStatus,
                   double maxDepthM, int tankSizeLitres) {
-        // TODO M2: Call super constructor
-        // TODO M2: Set maxDepthM and tankSizeLitres
+
+        super(species, nickname, island, weightKg, healthStatus);
+
+        this.maxDepthM = maxDepthM;
+        this.tankSizeLitres = tankSizeLitres;
     }
 
-    // TODO M2: Write getMaxDepthM() and getTankSizeLitres() getters
+    public double getMaxDepthM() { 
+        return maxDepthM;
+    }
 
-    /**
-     * TODO M2: Implement getType() - returns "Marine"
-     */
+    public int getTankSizeLitres() {
+        return tankSizeLitres;
+    }
 
-    /**
-     * Daily food cost = 50.0 + weightKg * 3.0
-     * TODO M2: Implement getDailyFoodCostTTD()
-     */
+    public String getType() {
+        return "Marine";    
+    }
+
+    public double getDailyFoodCostTTD() {
+        return 50.0 + getWeightKg() * 3.0;  
+    }
 
     // --- Trackable methods ---
     // TODO M4: Implement logSighting(String date, String location)

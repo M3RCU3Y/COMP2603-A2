@@ -1,4 +1,3 @@
-
 public class Bird extends Animal {
     private double wingspanCm;
     private boolean canFly;
@@ -26,4 +25,5 @@ public class Bird extends Animal {
     public double getDailyFoodCostTTD() {
         return 15.0 + getWeightKg() * 50.0;
     }
+
 }
