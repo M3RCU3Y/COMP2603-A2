@@ -1,50 +1,65 @@
 import java.util.ArrayList;
-
-/**
- * Manages a collection of animals at a single location.
- */
 public class Sanctuary {
-    // TODO M5: Declare private fields: name (String), island (String),
-    //          capacity (int), animals (ArrayList<Animal>)
+    private String name;
+    private String island;
+    private int capacity;
+    private ArrayList<Animal> animals;
 
-    /**
-     * TODO M5: Implement constructor
-     */
     public Sanctuary(String name, String island, int capacity) {
-        // TODO M5: Initialize all fields, create empty ArrayList
+        this.name = name;
+        this.island = island;
+        this.capacity = capacity;
+        animals = new ArrayList<Animal>();
     }
 
-    // TODO M5: Write getters for name, island, capacity, and animals
+    public String getName() {
+        return name;
+    }
+    public String getIsland() {
+        return island;
+    }   
 
-    /**
-     * Adds an animal to this sanctuary.
-     * Rejects null animals, rejects if at capacity, rejects if animal's island
-     * does not match this sanctuary's island.
-     *
-     * TODO M5: Implement addAnimal
-     */
+    public int getCapacity() {
+        return capacity;
+    }
+ 
+    public ArrayList<Animal> getAnimals() {
+        return animals;
+    }   
+
     public boolean addAnimal(Animal a) {
-        // TODO M5: Validate and add
-        return false;
-    }
+        if (a == null) {
+            return false;
+        }
+        if (animals.size() >= capacity) {
+            return false;
+        }
+        if (!a.getIsland().equals(island)) {
+            return false;
+        }
 
-    /**
-     * Removes and returns the animal with the given ID, or null if not found.
-     *
-     * TODO M5: Implement removeAnimal
-     */
+        animals.add(a);
+        return true;
+    } 
+
+
     public Animal removeAnimal(int animalId) {
-        // TODO M5: Find by ID, remove, and return
+        for (int i = 0; i < animals.size(); i++) {
+            Animal current = animals.get(i);
+
+            if (current.getAnimalId() == animalId) {
+                animals.remove(i);
+                return current;
+            }
+        }
+
         return null;
     }
 
-    /**
-     * TODO M5: Implement getAnimalCount
-     */
     public int getAnimalCount() {
-        // TODO M5
-        return 0;
+        return animals.size();
     }
+
 
     /**
      * Returns a new ArrayList containing only animals of the given type.
@@ -52,18 +67,30 @@ public class Sanctuary {
      * TODO M7: Implement getAnimalsOfType
      */
     public ArrayList<Animal> getAnimalsOfType(String type) {
-        // TODO M7: Filter by getType()
-        return new ArrayList<Animal>();
-    }
+         
+        ArrayList<Animal> matchingAnimals = new ArrayList<Animal>();
 
-    /**
-     * Returns the total daily food cost for all animals, rounded to 2 decimal places.
-     *
-     * TODO M7: Implement getDailyFoodBudget
-     */
+        for (int i= 0; i < animals.size(); i++) { 
+            Animal current=animals.get(i);
+
+
+            if (current.getType().equals(type)) { 
+                matchingAnimals.add(current); 
+            }
+        }
+
+        return matchingAnimals;
+    } 
+
     public double getDailyFoodBudget() {
-        // TODO M7: Sum getDailyFoodCostTTD() for all animals
-        return 0.0;
+
+        double total =0.0; 
+
+        for (int i = 0;i < animals.size(); i++) { 
+            Animal current = animals.get(i); 
+            total = total + current.getDailyFoodCostTTD(); 
+        }
+        return Math.round(total*100.0)/100.0;
     }
 
     /**
@@ -73,51 +100,69 @@ public class Sanctuary {
      * TODO M8: Implement getRelocatableAnimals
      */
     public ArrayList<Animal> getRelocatableAnimals() {
-        // TODO M8: Filter using instanceof Relocatable
-        return new ArrayList<Animal>();
+        ArrayList<Animal> relocatableAnimals = new ArrayList<Animal>();
+ 
+        for (int i =0; i < animals.size(); i++) {
+            Animal current = animals.get(i); 
+
+            if (current instanceof Relocatable) {
+                relocatableAnimals.add(current);
+            } 
+        }
+        return relocatableAnimals;
     }
 
-    /**
-     * Returns the animal with the highest daily food cost, or null if empty.
-     *
-     * TODO M7: Implement getMostExpensiveAnimal
-     */
     public Animal getMostExpensiveAnimal() {
-        // TODO M7: Find max by getDailyFoodCostTTD()
-        return null;
+        if (animals.size() == 0) {
+            return null;
+        }
+
+        Animal mostExpensive = animals.get(0);
+
+        for (int i =1; i < animals.size(); i++) { 
+            Animal current = animals.get(i);
+            if (current.getDailyFoodCostTTD()>mostExpensive.getDailyFoodCostTTD()) {
+                mostExpensive = current;
+            }
+        } 
+        return mostExpensive; 
     }
 
-    /**
-     * Transfers an animal to another sanctuary.
-     * If the animal does not implement Relocatable, the transfer fails:
-     * re-add the animal to this sanctuary and return false.
-     * Otherwise, call relocateTo on the animal, then addAnimal on target.
-     *
-     * TODO M8: Implement transferAnimal
-     */
     public boolean transferAnimal(int animalId, Sanctuary target) {
-        // TODO M8: Remove animal, check Relocatable, relocate, add to target
-        return false;
-    }
+        Animal animal = removeAnimal(animalId); 
 
-    /**
-     * Prints each animal's toString, indented by 2 spaces.
-     *
-     * TODO M5: Implement printRoster
-     */
+        if (animal == null) {
+            return false; 
+        }
+
+        if (!(animal instanceof Relocatable)) {
+            animals.add(animal); 
+            return false;
+        }
+        Relocatable relocatableAnimal=(Relocatable) animal;
+        relocatableAnimal.relocateTo(target.getIsland());
+
+        if (!target.addAnimal(animal)) {
+            relocatableAnimal.relocateTo(this.getIsland());
+            animals.add(animal);
+            return false; 
+        }
+ 
+        return true; 
+    }
+ 
     public void printRoster() {
-        // TODO M5: Loop and print
+        for (int i = 0; i < animals.size(); i++) {
+            System.out.println("  " + animals.get(i));
+        }
     }
 
     /**
      * Format: "Name (Island) [count/capacity animals]"
      * Example: "Caroni Bird Sanctuary (Trinidad) [12/50 animals]"
-     *
-     * TODO M5: Implement toString
      */
     @Override
     public String toString() {
-        // TODO M5: Return formatted string
-        return "";
+        return name + " (" + island + ") [" + animals.size() + "/" + capacity + " animals]";
     }
 }

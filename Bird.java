@@ -26,7 +26,6 @@ public class Bird extends Animal implements Trackable, Relocatable {
         return 15.0 + getWeightKg() * 50.0;
     }
 
-}
 
 // trackable methods
     public void logSighting(String date, String location) {
@@ -44,3 +43,17 @@ public class Bird extends Animal implements Trackable, Relocatable {
 
         return getSightings().get(getSightings().size() - 1);
     }
+
+    // Relocatable 
+    public boolean canRelocateTo(String targetIsland) {
+        return true;
+    }
+
+    public double getRelocationCost() {
+        return 500.0 + getWeightKg() * 100.0;
+    }
+
+    public void relocateTo(String island) {
+        setIsland(island);
+    }
+}
