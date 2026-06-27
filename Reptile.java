@@ -29,10 +29,20 @@ public class Reptile extends Animal implements Trackable {
         return 25.0 + getWeightKg() * 2.0; 
     }
 
-    // --- Trackable methods ---
-    // TODO M4: Implement logSighting(String date, String location)
+    // tracking methods
+    public void logSighting(String date, String location) {
+        getSightings().add(date + " at " + location);
+    }
 
-    // TODO M4: Implement getSightingCount()
+    public int getSightingCount() {
+        return getSightings().size();
+    }
 
-    // TODO M4: Implement getLastSighting()
+    
+    public String getLastSighting() {
+        if (getSightings().size() == 0) {
+            return "No sightings recorded";
+        }
+        return getSightings().get(getSightings().size() - 1);
+    }
 }

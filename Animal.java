@@ -12,9 +12,9 @@ public abstract class Animal {
     private String island;
     private double weightKg;
     private String healthStatus;
+    private ArrayList<String> sightings;
 
-    // TODO M4: Declare private ArrayList<String> sightings field
-
+    
     public Animal(String species, String nickname, String island, double weightKg, String healthStatus) {
         if (species == null || species.trim().equals("")) {
             throw new IllegalArgumentException("Species cannot be empty");
@@ -44,7 +44,7 @@ public abstract class Animal {
         this.weightKg = weightKg;
         this.healthStatus = healthStatus.trim();
 
-        // TODO M4: Initialize sightings ArrayList
+        sightings = new ArrayList<String>();
     }
 
     private boolean isValidHealthStatus(String status) {
@@ -98,8 +98,10 @@ public abstract class Animal {
         this.island = island.trim();
     }
 
-    // TODO M4: Write getSightings() getter that returns the ArrayList<String>
-
+    protected ArrayList<String> getSightings() {
+        return sightings;
+    }
+    
     public void updateHealth(String newStatus) {
 
         if (!isValidHealthStatus(newStatus)) {

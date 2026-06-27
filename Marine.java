@@ -27,12 +27,22 @@ public class Marine extends Animal implements Trackable, Relocatable {
         return 50.0 + getWeightKg() * 3.0;  
     }
 
-    // --- Trackable methods ---
-    // TODO M4: Implement logSighting(String date, String location)
+    // tracking
+    public void logSighting(String date, String location) {
+        getSightings().add(date + " at " + location);
+    }
 
-    // TODO M4: Implement getSightingCount()
 
-    // TODO M4: Implement getLastSighting()
+    public int getSightingCount() {
+        return getSightings().size();
+    }
+
+    public String getLastSighting() {
+        if (getSightings().size() == 0) {
+            return "No sightings recorded";
+        }
+        return getSightings().get(getSightings().size() - 1);
+    }
 
     // --- Relocatable methods ---
     // TODO M6: Implement canRelocateTo(String targetIsland)
