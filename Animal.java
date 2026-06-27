@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * Abstract base class for all animals in the conservation system.
- */
 public abstract class Animal {
     private static int nextId = 1;
 
@@ -42,26 +39,27 @@ public abstract class Animal {
         this.nickname = nickname.trim();
         this.island = island.trim();
         this.weightKg = weightKg;
-        this.healthStatus = healthStatus.trim();
+        this.healthStatus = healthStatus;
 
         sightings = new ArrayList<String>();
     }
 
     private boolean isValidHealthStatus(String status) {
-        if (status == null) {
+        if (status == null) { 
             return false;
         }
-        status = status.trim();
         if (status.equals("Healthy")) {
             return true;
-        }
+        } 
         if (status.equals("Injured")) {
             return true;
         }
+
         if (status.equals("Critical")) {
             return true;
-        }
-        return false;
+        } 
+
+        return false; 
     }
 
     //getters
@@ -103,14 +101,13 @@ public abstract class Animal {
     }
 
     public void updateHealth(String newStatus) {
-
         if (!isValidHealthStatus(newStatus)) {
             throw new IllegalArgumentException("Invalid health status");
         }
-        healthStatus = newStatus.trim();
-    }
+        healthStatus = newStatus;
+    } 
 
-    public abstract String getType();
+    public abstract String getType(); 
     public abstract double getDailyFoodCostTTD();
 
 
@@ -120,7 +117,7 @@ public abstract class Animal {
         return String.format("#%03d %s '%s' (%s) [%s] %.2f kg - %s",
                 animalId, species, nickname, island, getType(), weightKg, healthStatus);
     }
-    
+
 
     @Override
     public boolean equals(Object obj) {

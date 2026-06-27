@@ -60,12 +60,6 @@ public class Sanctuary {
         return animals.size();
     }
 
-
-    /**
-     * Returns a new ArrayList containing only animals of the given type.
-     *
-     * TODO M7: Implement getAnimalsOfType
-     */
     public ArrayList<Animal> getAnimalsOfType(String type) {
          
         ArrayList<Animal> matchingAnimals = new ArrayList<Animal>();
@@ -93,12 +87,6 @@ public class Sanctuary {
         return Math.round(total*100.0)/100.0;
     }
 
-    /**
-     * Returns all animals that implement the Relocatable interface.
-     * Hint: use instanceof.
-     *
-     * TODO M8: Implement getRelocatableAnimals
-     */
     public ArrayList<Animal> getRelocatableAnimals() {
         ArrayList<Animal> relocatableAnimals = new ArrayList<Animal>();
  
@@ -157,10 +145,6 @@ public class Sanctuary {
         }
     }
 
-    /**
-     * Format: "Name (Island) [count/capacity animals]"
-     * Example: "Caroni Bird Sanctuary (Trinidad) [12/50 animals]"
-     */
     @Override
     public String toString() {
         return name + " (" + island + ") [" + animals.size() + "/" + capacity + " animals]";

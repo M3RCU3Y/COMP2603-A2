@@ -67,7 +67,7 @@ public class Driver {
         System.out.println("Blue Lagoon Marine Park roster after transfer:");
         blueLagoon.printRoster();
 
-        
+
         System.out.println("=== Attempt to transfer Brutus (Reptile) ===");
         boolean brutusTransferred = caroni.transferAnimal(brutus.getAnimalId(), blueLagoon);
         System.out.println("Transfer successful: " + brutusTransferred);
@@ -76,13 +76,13 @@ public class Driver {
         Animal caroniExpensive = caroni.getMostExpensiveAnimal();
         Animal blueLagoonExpensive = blueLagoon.getMostExpensiveAnimal();
 
-        System.out.printf("Caroni: %s ($%.2f TTD/day)%n",
+        System.out.printf("Caroni: %s ($%.2f TTD/day)%n", 
                 caroniExpensive, caroniExpensive.getDailyFoodCostTTD());
 
         System.out.printf("Blue Lagoon: %s ($%.2f TTD/day)%n",
                 blueLagoonExpensive, blueLagoonExpensive.getDailyFoodCostTTD());
 
-        System.out.println("=== Updated food budgets ===");
+        System.out.println("=== Updated food budgets ==="); 
         System.out.printf("%s: $%.2f TTD%n", caroni.getName(), caroni.getDailyFoodBudget());
         System.out.printf("%s: $%.2f TTD%n", blueLagoon.getName(), blueLagoon.getDailyFoodBudget());
     }
