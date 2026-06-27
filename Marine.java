@@ -1,4 +1,4 @@
-public class Marine extends Animal /* TODO M3: implements Trackable, Relocatable */ {
+public class Marine extends Animal implements Trackable, Relocatable {
     private double maxDepthM;
     private int tankSizeLitres;
 

@@ -1,4 +1,4 @@
-public class Bird extends Animal {
+public class Bird extends Animal implements Trackable, Relocatable {
     private double wingspanCm;
     private boolean canFly;
 

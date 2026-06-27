@@ -7,9 +7,7 @@
  *   - String getLastSighting()
  */
 public interface Trackable {
-    // TODO M3: Declare logSighting method
-
-    // TODO M3: Declare getSightingCount method
-
-    // TODO M3: Declare getLastSighting method
+    void logSighting(String date, String location);
+    int getSightingCount();
+    String getLastSighting();
 }

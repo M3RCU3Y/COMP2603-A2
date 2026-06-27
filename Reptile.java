@@ -1,4 +1,4 @@
-public class Reptile extends Animal /* TODO M3: implements Trackable */ {
+public class Reptile extends Animal implements Trackable {
     private boolean isVenomous;
     private double lengthCm; 
 
@@ -31,7 +31,7 @@ public class Reptile extends Animal /* TODO M3: implements Trackable */ {
 
     // --- Trackable methods ---
     // TODO M4: Implement logSighting(String date, String location)
-    
+
     // TODO M4: Implement getSightingCount()
 
     // TODO M4: Implement getLastSighting()
