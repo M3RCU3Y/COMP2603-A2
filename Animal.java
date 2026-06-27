@@ -1,0 +1,133 @@
+import java.util.ArrayList;
+
+/**
+ * Abstract base class for all animals in the conservation system.
+ */
+public abstract class Animal {
+    private static int nextId = 1;
+
+    private int animalId;
+    private String species;
+    private String nickname;
+    private String island;
+    private double weightKg;
+    private String healthStatus;
+
+    // TODO M4: Declare private ArrayList<String> sightings field
+
+    public Animal(String species, String nickname, String island, double weightKg, String healthStatus) {
+        if (species == null || species.trim().equals("")) {
+            throw new IllegalArgumentException("Species cannot be empty");
+        } 
+        if (nickname == null || nickname.trim().equals("")) {
+            throw new IllegalArgumentException("Nickname cannot be empty");
+        }
+        if (island == null || island.trim().equals("")) {
+            throw new IllegalArgumentException("Island cannot be empty");
+        }
+        if (weightKg <= 0) {
+            throw new IllegalArgumentException("Weight must be greater than 0");
+        }
+        if (!isValidHealthStatus(healthStatus)) {
+            throw new IllegalArgumentException("Invalid health status");
+        }
+
+
+
+
+        this.animalId = nextId; // 
+        nextId++;
+
+        this.species = species.trim();
+        this.nickname = nickname.trim();
+        this.island = island.trim();
+        this.weightKg = weightKg;
+        this.healthStatus = healthStatus.trim();
+
+        // TODO M4: Initialize sightings ArrayList
+    }
+
+    private boolean isValidHealthStatus(String status) {
+        if (status == null) {
+            return false;
+        }
+        status = status.trim();
+        if (status.equals("Healthy")) {
+            return true;
+        }
+        if (status.equals("Injured")) {
+            return true;
+        }
+        if (status.equals("Critical")) {
+            return true;
+        }
+        return false;
+    }
+
+    //getters
+    public int getAnimalId() {
+        return animalId;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getIsland() {
+        return island;
+    }
+
+    public double getWeightKg() {
+        return weightKg;
+    }
+
+    public String getHealthStatus() {
+        return healthStatus;
+    }
+
+    
+    public void setIsland(String island) {
+        if (island == null || island.trim().equals("")) {
+            throw new IllegalArgumentException("Island cannot be empty");
+        }
+
+        this.island = island.trim();
+    }
+
+    // TODO M4: Write getSightings() getter that returns the ArrayList<String>
+
+    public void updateHealth(String newStatus) {
+
+        if (!isValidHealthStatus(newStatus)) {
+            throw new IllegalArgumentException("Invalid health status");
+        }
+        healthStatus = newStatus.trim();
+    }
+
+    public abstract String getType();
+    public abstract double getDailyFoodCostTTD();
+
+
+// overides
+    @Override
+    public String toString() {
+        return String.format("#%03d %s '%s' (%s) [%s] %.2f kg - %s",
+                animalId, species, nickname, island, getType(), weightKg, healthStatus);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // TODO M5: Implement equality by animalId
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        // TODO M5: Return hash based on animalId
+        return 0;
+    }
+}
